@@ -2,6 +2,10 @@
 
 Terraform for the AWS side of the LeoCinema CI pipelines: **GitHub Actions authenticates to AWS with OIDC**, so there are no long-lived access keys in GitHub secrets.
 
+![CI flow](docs/ci-pipeline.png)
+
+The workflow that uses this role lives in [app-leocinema-backend](https://github.com/leonardobgsilva/app-leocinema-backend) (branch `oidc`). It builds the image, pushes it to ECR with an immutable SHA tag, runs Trivy and opens a pull request in the GitOps repository.
+
 ## What it creates
 
 | Resource | Purpose |
@@ -45,6 +49,11 @@ steps:
       aws-region: us-east-1
   - uses: aws-actions/amazon-ecr-login@v2
 ```
+
+## Known limits
+
+- The deploy of the ECR image on EKS was **not tested** (the cluster is off to avoid cost). The pipeline is validated up to the GitOps pull request.
+- The GitOps pull request uses a fine-grained token (limited to one repository), which is still a long-lived secret. A GitHub App would be the next step.
 
 ## Why this is a separate stack
 
