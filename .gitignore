@@ -1,0 +1,11 @@
+# Terraform state and local files can hold secrets: never commit them
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+crash.log
+override.tf
+override.tf.json
+tfplan
+*.tfplan
