@@ -6,6 +6,8 @@ Terraform for the AWS side of the LeoCinema CI pipelines: **GitHub Actions authe
 
 The workflow that uses this role lives in [app-leocinema-backend](https://github.com/leonardobgsilva/app-leocinema-backend) (branch `oidc`). It builds the image, pushes it to ECR with an immutable SHA tag, runs Trivy and opens a pull request in the GitOps repository.
 
+> **Status:** stack destroyed after the demo to avoid cost. `terraform apply` recreates it in a few minutes.
+
 ## What it creates
 
 | Resource | Purpose |
